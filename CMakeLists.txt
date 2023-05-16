@@ -19,8 +19,6 @@ include(CMDeploy)
 include(CMConfig)
 include(CMSetupVersion)
 
-cm_setup_version(VERSION 1.73.0)
-
 option(BUILD_WITH_CI_KNOWN_ISSUES_SUPPRESS "Build for CI suppressing known issues" FALSE)
 option(BUILD_TESTS "Build unit tests" FALSE)
 
@@ -32,6 +30,7 @@ if("${CMAKE_WORKSPACE_NAME}" STREQUAL "boost")
     set(BOOST_CMAKE TRUE)
 
     cm_project(multiprecision WORKSPACE_NAME ${CMAKE_WORKSPACE_NAME})
+    cm_setup_version(VERSION 1.73.0)
 
     find_package(${CMAKE_WORKSPACE_NAME}_core)
     find_package(${CMAKE_WORKSPACE_NAME}_static_assert)
@@ -77,6 +76,7 @@ else()
     cm_workspace(crypto3 SOURCES_DIR "${CMAKE_CURRENT_LIST_DIR}")
 
     cm_project(multiprecision WORKSPACE_NAME ${CMAKE_WORKSPACE_NAME})
+    cm_setup_version(VERSION 1.73.0)
 
     if(NOT Boost_FOUND AND NOT CMAKE_CROSSCOMPILING)
         cm_find_package(Boost COMPONENTS REQUIRED random)
